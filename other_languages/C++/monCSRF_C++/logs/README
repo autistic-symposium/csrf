@@ -1,0 +1,3 @@
+In case you are not generating your own logs, you can use some of the examples of logs here.
+
+In case you have the APACHE+MODSEC+DIVA (you are in the VM), there is a symbolic link for its output (my_log).

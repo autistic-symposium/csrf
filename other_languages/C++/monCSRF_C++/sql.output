@@ -1,0 +1,377 @@
+Terminals unused in grammar
+
+   TOK_OTHER
+
+
+State 16 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: cmdlist $end
+
+    1 stmtsep: TOK_STMT_SEP
+
+    2 op: TOK_OPERATOR
+
+    3 oprparen: op rparen
+
+    4 word: TOK_WORD
+    5     | TOK_KEYWORD
+    6     | TOK_NUM
+    7     | TOK_COMMENT
+    8     | TOK_WS
+
+    9 lparen: TOK_OPEN_PAREN
+
+   10 rparen: TOK_CLOSE_PAREN
+
+   11 cmdlist: cmdlistWithTerms
+   12        | cmdlistWithTerms cmdwithops
+
+   13 cmdlistWithTerms: /* empty */
+   14                 | cmdlistWithTerms stmtsep
+   15                 | cmdlistWithTerms cmdwithops stmtsep
+   16                 | cmdlistWithTerms error stmtsep
+
+   17 cmdwithops: wordVarComp
+   18           | op wordVarComp
+   19           | cmdwithops wordVarComp
+   20           | cmdwithops op
+
+   21 wordVarComp: word
+   22            | compoundcmd
+
+   23 compoundcmd: lparen cmdlist rparen
+   24            | lparen oprparen
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256) 16
+TOK_STMT_SEP (258) 1
+TOK_OPERATOR (259) 2
+TOK_OPEN_PAREN (260) 9
+TOK_CLOSE_PAREN (261) 10
+TOK_WORD (262) 4
+TOK_KEYWORD (263) 5
+TOK_NUM (264) 6
+TOK_COMMENT (265) 7
+TOK_OTHER (266)
+TOK_WS (267) 8
+
+
+Nonterminals, with rules where they appear
+
+$accept (13)
+    on left: 0
+stmtsep (14)
+    on left: 1, on right: 14 15 16
+op (15)
+    on left: 2, on right: 3 18 20
+oprparen (16)
+    on left: 3, on right: 24
+word (17)
+    on left: 4 5 6 7 8, on right: 21
+lparen (18)
+    on left: 9, on right: 23 24
+rparen (19)
+    on left: 10, on right: 3 23
+cmdlist (20)
+    on left: 11 12, on right: 0 23
+cmdlistWithTerms (21)
+    on left: 13 14 15 16, on right: 11 12 14 15 16
+cmdwithops (22)
+    on left: 17 18 19 20, on right: 12 15 19 20
+wordVarComp (23)
+    on left: 21 22, on right: 17 18 19
+compoundcmd (24)
+    on left: 23 24, on right: 22
+
+
+state 0
+
+    0 $accept: . cmdlist $end
+
+    $default  reduce using rule 13 (cmdlistWithTerms)
+
+    cmdlist           go to state 1
+    cmdlistWithTerms  go to state 2
+
+
+state 1
+
+    0 $accept: cmdlist . $end
+
+    $end  shift, and go to state 3
+
+
+state 2
+
+   11 cmdlist: cmdlistWithTerms .
+   12        | cmdlistWithTerms . cmdwithops
+   14 cmdlistWithTerms: cmdlistWithTerms . stmtsep
+   15                 | cmdlistWithTerms . cmdwithops stmtsep
+   16                 | cmdlistWithTerms . error stmtsep
+
+    error           shift, and go to state 4
+    TOK_STMT_SEP    shift, and go to state 5
+    TOK_OPERATOR    shift, and go to state 6
+    TOK_OPEN_PAREN  shift, and go to state 7
+    TOK_WORD        shift, and go to state 8
+    TOK_KEYWORD     shift, and go to state 9
+    TOK_NUM         shift, and go to state 10
+    TOK_COMMENT     shift, and go to state 11
+    TOK_WS          shift, and go to state 12
+
+    $end             reduce using rule 11 (cmdlist)
+    TOK_CLOSE_PAREN  reduce using rule 11 (cmdlist)
+
+    stmtsep      go to state 13
+    op           go to state 14
+    word         go to state 15
+    lparen       go to state 16
+    cmdwithops   go to state 17
+    wordVarComp  go to state 18
+    compoundcmd  go to state 19
+
+
+state 3
+
+    0 $accept: cmdlist $end .
+
+    $default  accept
+
+
+state 4
+
+   16 cmdlistWithTerms: cmdlistWithTerms error . stmtsep
+
+    TOK_STMT_SEP  shift, and go to state 5
+
+    stmtsep  go to state 20
+
+
+state 5
+
+    1 stmtsep: TOK_STMT_SEP .
+
+    $default  reduce using rule 1 (stmtsep)
+
+
+state 6
+
+    2 op: TOK_OPERATOR .
+
+    $default  reduce using rule 2 (op)
+
+
+state 7
+
+    9 lparen: TOK_OPEN_PAREN .
+
+    $default  reduce using rule 9 (lparen)
+
+
+state 8
+
+    4 word: TOK_WORD .
+
+    $default  reduce using rule 4 (word)
+
+
+state 9
+
+    5 word: TOK_KEYWORD .
+
+    $default  reduce using rule 5 (word)
+
+
+state 10
+
+    6 word: TOK_NUM .
+
+    $default  reduce using rule 6 (word)
+
+
+state 11
+
+    7 word: TOK_COMMENT .
+
+    $default  reduce using rule 7 (word)
+
+
+state 12
+
+    8 word: TOK_WS .
+
+    $default  reduce using rule 8 (word)
+
+
+state 13
+
+   14 cmdlistWithTerms: cmdlistWithTerms stmtsep .
+
+    $default  reduce using rule 14 (cmdlistWithTerms)
+
+
+state 14
+
+   18 cmdwithops: op . wordVarComp
+
+    TOK_OPEN_PAREN  shift, and go to state 7
+    TOK_WORD        shift, and go to state 8
+    TOK_KEYWORD     shift, and go to state 9
+    TOK_NUM         shift, and go to state 10
+    TOK_COMMENT     shift, and go to state 11
+    TOK_WS          shift, and go to state 12
+
+    word         go to state 15
+    lparen       go to state 16
+    wordVarComp  go to state 21
+    compoundcmd  go to state 19
+
+
+state 15
+
+   21 wordVarComp: word .
+
+    $default  reduce using rule 21 (wordVarComp)
+
+
+state 16
+
+   23 compoundcmd: lparen . cmdlist rparen
+   24            | lparen . oprparen
+
+    TOK_OPERATOR  shift, and go to state 6
+
+    TOK_OPERATOR  [reduce using rule 13 (cmdlistWithTerms)]
+    $default      reduce using rule 13 (cmdlistWithTerms)
+
+    op                go to state 22
+    oprparen          go to state 23
+    cmdlist           go to state 24
+    cmdlistWithTerms  go to state 2
+
+
+state 17
+
+   12 cmdlist: cmdlistWithTerms cmdwithops .
+   15 cmdlistWithTerms: cmdlistWithTerms cmdwithops . stmtsep
+   19 cmdwithops: cmdwithops . wordVarComp
+   20           | cmdwithops . op
+
+    TOK_STMT_SEP    shift, and go to state 5
+    TOK_OPERATOR    shift, and go to state 6
+    TOK_OPEN_PAREN  shift, and go to state 7
+    TOK_WORD        shift, and go to state 8
+    TOK_KEYWORD     shift, and go to state 9
+    TOK_NUM         shift, and go to state 10
+    TOK_COMMENT     shift, and go to state 11
+    TOK_WS          shift, and go to state 12
+
+    $default  reduce using rule 12 (cmdlist)
+
+    stmtsep      go to state 25
+    op           go to state 26
+    word         go to state 15
+    lparen       go to state 16
+    wordVarComp  go to state 27
+    compoundcmd  go to state 19
+
+
+state 18
+
+   17 cmdwithops: wordVarComp .
+
+    $default  reduce using rule 17 (cmdwithops)
+
+
+state 19
+
+   22 wordVarComp: compoundcmd .
+
+    $default  reduce using rule 22 (wordVarComp)
+
+
+state 20
+
+   16 cmdlistWithTerms: cmdlistWithTerms error stmtsep .
+
+    $default  reduce using rule 16 (cmdlistWithTerms)
+
+
+state 21
+
+   18 cmdwithops: op wordVarComp .
+
+    $default  reduce using rule 18 (cmdwithops)
+
+
+state 22
+
+    3 oprparen: op . rparen
+
+    TOK_CLOSE_PAREN  shift, and go to state 28
+
+    rparen  go to state 29
+
+
+state 23
+
+   24 compoundcmd: lparen oprparen .
+
+    $default  reduce using rule 24 (compoundcmd)
+
+
+state 24
+
+   23 compoundcmd: lparen cmdlist . rparen
+
+    TOK_CLOSE_PAREN  shift, and go to state 28
+
+    rparen  go to state 30
+
+
+state 25
+
+   15 cmdlistWithTerms: cmdlistWithTerms cmdwithops stmtsep .
+
+    $default  reduce using rule 15 (cmdlistWithTerms)
+
+
+state 26
+
+   20 cmdwithops: cmdwithops op .
+
+    $default  reduce using rule 20 (cmdwithops)
+
+
+state 27
+
+   19 cmdwithops: cmdwithops wordVarComp .
+
+    $default  reduce using rule 19 (cmdwithops)
+
+
+state 28
+
+   10 rparen: TOK_CLOSE_PAREN .
+
+    $default  reduce using rule 10 (rparen)
+
+
+state 29
+
+    3 oprparen: op rparen .
+
+    $default  reduce using rule 3 (oprparen)
+
+
+state 30
+
+   23 compoundcmd: lparen cmdlist rparen .
+
+    $default  reduce using rule 23 (compoundcmd)

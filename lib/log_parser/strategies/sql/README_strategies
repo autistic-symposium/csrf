@@ -1,0 +1,11 @@
+=======================================================
+
+There are many ways we can parse a data file. Here we have tried two strategies:
+
+1) Using only REGEXP (deprecated).
+
+2) Parsing into a AST.
+#It is much more efficient than using REGEXP since we now see the abstract syntact structure of the object, i.e., it does not represent every detail in the real syntax. Each node of the tree denotes a construct in the source code.
+
+
+=======================================================

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class LogParser::Strategies::Sql::Ragel - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../../../index.html">Home</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/log_parser/strategies/sql/ragel.rb
+    <li>other_languages/C++/monCSRF_C++/lib/log_parser/strategies/sql/ragel.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Base
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-parse">::parse</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../../../Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../../../README_rdoc.html">README</a>
+  
+    <li class="file"><a href="../../../lib/log_parser/strategies/sql/README_strategies.html">README_strategies</a>
+  
+    <li class="file"><a href="../../../lib/log_parser/strategies/sql/dot_to_png.html">dot_to_png</a>
+  
+    <li class="file"><a href="../../../logs/attack_log.html">attack_log</a>
+  
+    <li class="file"><a href="../../../logs/log.html">log</a>
+  
+    <li class="file"><a href="../../../logs/log_simple.html">log_simple</a>
+  
+    <li class="file"><a href="../../../logs/log_tests.html">log_tests</a>
+  
+    <li class="file"><a href="../../../logs/white_list.html">white_list</a>
+  
+    <li class="file"><a href="../../../logs/white_list2.html">white_list2</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/Makefile.html">Makefile</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/README.html">README</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/README_rdoc.html">README</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/attack_log.html">attack_log</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/demos/README.html">README</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/demos/README~.html">README~</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/lib/log_parser/strategies/sql/README_strategies.html">README_strategies</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/logs/README.html">README</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/logs/README~.html">README~</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/logs/log.html">log</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/logs~b265d9806d0c7629e7eff6ef2fc8d8c8df5f52a6/attack_log.html">attack_log</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/logs~b265d9806d0c7629e7eff6ef2fc8d8c8df5f52a6/log.html">log</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/logs~b265d9806d0c7629e7eff6ef2fc8d8c8df5f52a6/log_simple.html">log_simple</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/logs~b265d9806d0c7629e7eff6ef2fc8d8c8df5f52a6/log_tests.html">log_tests</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/logs~b265d9806d0c7629e7eff6ef2fc8d8c8df5f52a6/white_list.html">white_list</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/logs~b265d9806d0c7629e7eff6ef2fc8d8c8df5f52a6/white_list2.html">white_list2</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/spec/fixtures/attack_log.html">attack_log</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/spec/fixtures/log.html">log</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/spec/fixtures/log_simple.html">log_simple</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/spec/fixtures/log_tests.html">log_tests</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/spec/fixtures/white_list.html">white_list</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/spec/fixtures/white_list2.html">white_list2</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/white_list.html">white_list</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/white_list~.html">white_list~</a>
+  
+    <li class="file"><a href="../../../other_languages/C++/monCSRF_C++/whitelist_txt.html">whitelist</a>
+  
+    <li class="file"><a href="../../../other_languages/py/moncsrfpy/log.html">log</a>
+  
+    <li class="file"><a href="../../../other_languages/py/moncsrfpy/tests/GIT.html">GIT</a>
+  
+    <li class="file"><a href="../../../other_languages/py/moncsrfpy/tests/README.html">README</a>
+  
+    <li class="file"><a href="../../../other_languages/py/moncsrfpy/tests/README~.html">README~</a>
+  
+    <li class="file"><a href="../../../spec/fixtures/attack_log.html">attack_log</a>
+  
+    <li class="file"><a href="../../../spec/fixtures/log.html">log</a>
+  
+    <li class="file"><a href="../../../spec/fixtures/log_simple.html">log_simple</a>
+  
+    <li class="file"><a href="../../../spec/fixtures/log_tests.html">log_tests</a>
+  
+    <li class="file"><a href="../../../spec/fixtures/white_list.html">white_list</a>
+  
+    <li class="file"><a href="../../../spec/fixtures/white_list2.html">white_list2</a>
+  
+    <li class="file"><a href="../../../white_list.html">white_list</a>
+  
+    <li class="file"><a href="../../../white_list~.html">white_list~</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../../../LogParser.html">LogParser</a>
+  
+    <li><a href="../../../LogParser/Log.html">LogParser::Log</a>
+  
+    <li><a href="../../../LogParser/LogEntry.html">LogParser::LogEntry</a>
+  
+    <li><a href="../../../LogParser/SqlInfo.html">LogParser::SqlInfo</a>
+  
+    <li><a href="../../../LogParser/Strategies.html">LogParser::Strategies</a>
+  
+    <li><a href="../../../LogParser/Strategies/Sql.html">LogParser::Strategies::Sql</a>
+  
+    <li><a href="../../../LogParser/Strategies/Sql/Base.html">LogParser::Strategies::Sql::Base</a>
+  
+    <li><a href="../../../LogParser/Strategies/Sql/Ragel.html">LogParser::Strategies::Sql::Ragel</a>
+  
+    <li><a href="../../../LogParser/Strategies/Sql/Regexp.html">LogParser::Strategies::Sql::Regexp</a>
+  
+    <li><a href="../../../LogParser/WhiteList.html">LogParser::WhiteList</a>
+  
+    <li><a href="../../../Object.html">Object</a>
+  
+    <li><a href="../../../Runtime.html">Runtime</a>
+  
+    <li><a href="../../../Sql.html">Sql</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class LogParser::Strategies::Sql::Ragel</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-c-ragel_en_main" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">ragel_en_main</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-c-ragel_error" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">ragel_error</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-c-ragel_first_final" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">ragel_first_final</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-c-ragel_start" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">ragel_start</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-parse" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">parse</span><span
+            class="method-args">(data, object_store)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>line 116 “ragel.rl”</p>
+          
+
+          
+          <div class="method-source-code" id="parse-source">
+            <pre><span class="ruby-comment"># File lib/log_parser/strategies/sql/ragel.rb, line 444</span>
+        <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">object_store</span>)
+          <span class="ruby-identifier">str_buf</span> = <span class="ruby-string">&quot;&quot;</span>
+          <span class="ruby-identifier">last_field_buf</span> = <span class="ruby-keyword">nil</span>
+          <span class="ruby-identifier">last_operator</span>  = <span class="ruby-keyword">nil</span>
+          <span class="ruby-identifier">expression_buf</span> = <span class="ruby-string">&quot;&quot;</span>
+
+          <span class="ruby-identifier">data</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;c*&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+
+          
+<span class="ruby-comment"># line 454 &quot;ragel.rb&quot;</span>
+<span class="ruby-keyword">begin</span>
+        <span class="ruby-identifier">p</span> <span class="ruby-operator">||=</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">pe</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">length</span>
+        <span class="ruby-identifier">cs</span> = <span class="ruby-identifier">ragel_start</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># line 126 &quot;ragel.rl&quot;</span>
+          
+<span class="ruby-comment"># line 463 &quot;ragel.rb&quot;</span>
+<span class="ruby-keyword">begin</span>
+        <span class="ruby-identifier">_klen</span>, <span class="ruby-identifier">_trans</span>, <span class="ruby-identifier">_keys</span>, <span class="ruby-identifier">_acts</span>, <span class="ruby-identifier">_nacts</span> = <span class="ruby-keyword">nil</span>
+        <span class="ruby-identifier">_goto_level</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">_resume</span> = <span class="ruby-value">10</span>
+        <span class="ruby-identifier">_eof_trans</span> = <span class="ruby-value">15</span>
+        <span class="ruby-identifier">_again</span> = <span class="ruby-value">20</span>
+        <span class="ruby-identifier">_test_eof</span> = <span class="ruby-value">30</span>
+        <span class="ruby-identifier">_out</span> = <span class="ruby-value">40</span>
+        <span class="ruby-keyword">while</span> <span class="ruby-keyword">true</span>
+        <span class="ruby-identifier">_trigger_goto</span> = <span class="ruby-keyword">false</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">_goto_level</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">p</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">pe</span>
+                <span class="ruby-identifier">_goto_level</span> = <span class="ruby-identifier">_test_eof</span>
+                <span class="ruby-keyword">next</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">cs</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+                <span class="ruby-identifier">_goto_level</span> = <span class="ruby-identifier">_out</span>
+                <span class="ruby-keyword">next</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">_goto_level</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">_resume</span>
+        <span class="ruby-identifier">_keys</span> = <span class="ruby-identifier">_ragel_key_offsets</span>[<span class="ruby-identifier">cs</span>]
+        <span class="ruby-identifier">_trans</span> = <span class="ruby-identifier">_ragel_index_offsets</span>[<span class="ruby-identifier">cs</span>]
+        <span class="ruby-identifier">_klen</span> = <span class="ruby-identifier">_ragel_single_lengths</span>[<span class="ruby-identifier">cs</span>]
+        <span class="ruby-identifier">_break_match</span> = <span class="ruby-keyword">false</span>
+        
+        <span class="ruby-keyword">begin</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">_klen</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+             <span class="ruby-identifier">_lower</span> = <span class="ruby-identifier">_keys</span>
+             <span class="ruby-identifier">_upper</span> = <span class="ruby-identifier">_keys</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">_klen</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+
+             <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">_upper</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">_lower</span>
+                <span class="ruby-identifier">_mid</span> = <span class="ruby-identifier">_lower</span> <span class="ruby-operator">+</span> ( (<span class="ruby-identifier">_upper</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">_lower</span>) <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">1</span> )
+
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>[<span class="ruby-identifier">p</span>] <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">_ragel_trans_keys</span>[<span class="ruby-identifier">_mid</span>]
+                   <span class="ruby-identifier">_upper</span> = <span class="ruby-identifier">_mid</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">data</span>[<span class="ruby-identifier">p</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">_ragel_trans_keys</span>[<span class="ruby-identifier">_mid</span>]
+                   <span class="ruby-identifier">_lower</span> = <span class="ruby-identifier">_mid</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+                <span class="ruby-keyword">else</span>
+                   <span class="ruby-identifier">_trans</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">_mid</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">_keys</span>)
+                   <span class="ruby-identifier">_break_match</span> = <span class="ruby-keyword">true</span>
+                   <span class="ruby-keyword">break</span>
+                <span class="ruby-keyword">end</span>
+             <span class="ruby-keyword">end</span> <span class="ruby-comment"># loop</span>
+             <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">_break_match</span>
+             <span class="ruby-identifier">_keys</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">_klen</span>
+             <span class="ruby-identifier">_trans</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">_klen</span>
+          <span class="ruby-keyword">end</span>
+          <span class="ruby-identifier">_klen</span> = <span class="ruby-identifier">_ragel_range_lengths</span>[<span class="ruby-identifier">cs</span>]
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">_klen</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+             <span class="ruby-identifier">_lower</span> = <span class="ruby-identifier">_keys</span>
+             <span class="ruby-identifier">_upper</span> = <span class="ruby-identifier">_keys</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">_klen</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">1</span>) <span class="ruby-operator">-</span> <span class="ruby-value">2</span>
+             <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">_upper</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">_lower</span>
+                <span class="ruby-identifier">_mid</span> = <span class="ruby-identifier">_lower</span> <span class="ruby-operator">+</span> (((<span class="ruby-identifier">_upper</span><span class="ruby-operator">-</span><span class="ruby-identifier">_lower</span>) <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">1</span>) &amp; <span class="ruby-operator">~</span><span class="ruby-value">1</span>)
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>[<span class="ruby-identifier">p</span>] <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">_ragel_trans_keys</span>[<span class="ruby-identifier">_mid</span>]
+                  <span class="ruby-identifier">_upper</span> = <span class="ruby-identifier">_mid</span> <span class="ruby-operator">-</span> <span class="ruby-value">2</span>
+                <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">data</span>[<span class="ruby-identifier">p</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">_ragel_trans_keys</span>[<span class="ruby-identifier">_mid</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>]
+                  <span class="ruby-identifier">_lower</span> = <span class="ruby-identifier">_mid</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span>
+                <span class="ruby-keyword">else</span>
+                  <span class="ruby-identifier">_trans</span> <span class="ruby-operator">+=</span> ((<span class="ruby-identifier">_mid</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">_keys</span>) <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">1</span>)
+                  <span class="ruby-identifier">_break_match</span> = <span class="ruby-keyword">true</span>
+                  <span class="ruby-keyword">break</span>
+                <span class="ruby-keyword">end</span>
+             <span class="ruby-keyword">end</span> <span class="ruby-comment"># loop</span>
+             <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">_break_match</span>
+             <span class="ruby-identifier">_trans</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">_klen</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span> <span class="ruby-keyword">while</span> <span class="ruby-keyword">false</span>
+        <span class="ruby-identifier">cs</span> = <span class="ruby-identifier">_ragel_trans_targs</span>[<span class="ruby-identifier">_trans</span>]
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">_ragel_trans_actions</span>[<span class="ruby-identifier">_trans</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+                <span class="ruby-identifier">_acts</span> = <span class="ruby-identifier">_ragel_trans_actions</span>[<span class="ruby-identifier">_trans</span>]
+                <span class="ruby-identifier">_nacts</span> = <span class="ruby-identifier">_ragel_actions</span>[<span class="ruby-identifier">_acts</span>]
+                <span class="ruby-identifier">_acts</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+                <span class="ruby-keyword">while</span> <span class="ruby-identifier">_nacts</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+                        <span class="ruby-identifier">_nacts</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+                        <span class="ruby-identifier">_acts</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+                        <span class="ruby-keyword">case</span> <span class="ruby-identifier">_ragel_actions</span>[<span class="ruby-identifier">_acts</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>]
+<span class="ruby-keyword">when</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 10 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+
+            <span class="ruby-identifier">str_buf</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>[<span class="ruby-identifier">p</span>].<span class="ruby-identifier">chr</span>
+                        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 14 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+
+            <span class="ruby-identifier">last_field_buf</span> = <span class="ruby-identifier">str_buf</span>
+            <span class="ruby-identifier">str_buf</span> = <span class="ruby-string">&quot;&quot;</span>
+                        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">2</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 23 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+
+            <span class="ruby-identifier">last_operator</span> = <span class="ruby-identifier">str_buf</span>
+            <span class="ruby-identifier">str_buf</span> = <span class="ruby-string">&quot;&quot;</span>
+                        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">3</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 28 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+
+            <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">where</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">str_buf</span>
+            <span class="ruby-identifier">str_buf</span> = <span class="ruby-string">&quot;&quot;</span>
+                        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">4</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 33 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+
+            <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">table_name</span> = <span class="ruby-identifier">str_buf</span>.<span class="ruby-identifier">to_sym</span>
+            <span class="ruby-identifier">str_buf</span> = <span class="ruby-string">&quot;&quot;</span>
+                        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">5</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 38 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+
+                        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">6</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 41 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+
+                        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">7</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 44 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+
+            <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">columns</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Array</span>
+            <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">columns</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">str_buf</span>.<span class="ruby-identifier">to_sym</span>
+            <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">sort!</span>
+            <span class="ruby-identifier">str_buf</span> = <span class="ruby-string">&quot;&quot;</span>
+                        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">8</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 51 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+
+                        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">9</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 54 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+
+            <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">where</span> = <span class="ruby-string">&quot;&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">where</span>
+            <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">where</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">last_field_buf</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">last_operator</span>
+                        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">10</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 85 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+ <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">sql_type</span> = <span class="ruby-value">:select</span>                <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">11</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 86 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+ <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">sql_type</span> = <span class="ruby-value">:update</span>                <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">12</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 87 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+ <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">sql_type</span> = <span class="ruby-value">:delete</span>                <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">when</span> <span class="ruby-value">13</span> <span class="ruby-keyword">then</span>
+<span class="ruby-comment"># line 88 &quot;ragel.rl&quot;</span>
+                <span class="ruby-keyword">begin</span>
+ <span class="ruby-identifier">object_store</span>.<span class="ruby-identifier">sql_type</span> = <span class="ruby-value">:insert</span>                <span class="ruby-keyword">end</span>
+<span class="ruby-comment"># line 624 &quot;ragel.rb&quot;</span>
+                        <span class="ruby-keyword">end</span> <span class="ruby-comment"># action switch</span>
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">_trigger_goto</span>
+                <span class="ruby-keyword">next</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">_goto_level</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">_again</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">cs</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+                <span class="ruby-identifier">_goto_level</span> = <span class="ruby-identifier">_out</span>
+                <span class="ruby-keyword">next</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">p</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">p</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">pe</span>
+                <span class="ruby-identifier">_goto_level</span> = <span class="ruby-identifier">_resume</span>
+                <span class="ruby-keyword">next</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">_goto_level</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">_test_eof</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">_goto_level</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">_out</span>
+                <span class="ruby-keyword">break</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># line 127 &quot;ragel.rl&quot;</span>
+
+        <span class="ruby-keyword">end</span></pre>
+          </div><!-- parse-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- parse-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

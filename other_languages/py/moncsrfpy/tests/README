@@ -1,0 +1,3 @@
+tdd
+python -m unittest LogEntryTestCase
+python -m unittest sql_info_test

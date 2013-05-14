@@ -1,0 +1,23 @@
+UPDATE phpbb_users SET user_session_time = 1326142245, user_session_page = 0, user_lastvisit = 1326142245 WHERE user_id = 9
+UPDATE phpbb_sessions SET session_time = 1326142265, session_page = -4 WHERE session_id = '6d2f32fdd596b44d2c8bb66f72b75e73'
+DELETE FROM phpbb_sessions WHERE session_time < 1326138665 AND session_id <> '6d2f32fdd596b44d2c8bb66f72b75e73'
+INSERT INTO phpbb_users (user_id, username, user_regdate, user_password, user_email, user_icq, user_website, user_occ, user_from, user_interests, user_sig, user_sig_bbcode_uid, user_avatar, user_avatar_type, user_viewemail, user_aim, user_yim, user_msnm, user_attachsig, user_allowsmile, user_allowhtml, user_allowbbcode, user_allow_viewonline, user_notify, user_notify_pm, user_popup_pm, user_timezone, user_dateformat, user_lang, user_style, user_level, user_allow_pm, user_active, user_actkey) VALUES (10, 'victim', 1326142293, '96d4976b516a16ac19d148f3b744eee1', 'victim@victim.com', '', '', '', '', '', '', '', '', 0, 0, '', '', '', 1, 1, 0, 1, 1, 0, 1, 1, 0, 'D M d, Y g:i a', 'english', 1, 0, 1, 1, '')
+INSERT INTO phpbb_groups (group_name, group_description, group_single_user, group_moderator) VALUES ('', 'Personal User', 1, 0)
+INSERT INTO phpbb_user_group (user_id, group_id, user_pending) VALUES (10, 10, 0)
+UPDATE phpbb_sessions SET session_user_id = 10, session_start = 1326142305, session_time = 1326142305, session_page = 0, session_logged_in = 1 WHERE session_id = '6d2f32fdd596b44d2c8bb66f72b75e73' AND session_ip = '7f000001'
+UPDATE phpbb_users SET user_session_time = 1326142333, user_session_page = 0 WHERE user_id = 9
+INSERT INTO phpbb_topics (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_vote) VALUES ('HA-HA', 9, 1326142370, 1, 0, 0, 0)
+INSERT INTO phpbb_posts (topic_id, forum_id, poster_id, post_username, post_time, poster_ip, enable_bbcode, enable_html, enable_smilies, enable_sig) VALUES (6, 1, 9, '', 1326142370, '7f000001', 1, 0, 1, 0)
+INSERT INTO phpbb_posts_text (post_id, post_subject, bbcode_uid, post_text) VALUES (8, 'HA-HA', 'cef221ae7d', '[img:cef221ae7d]http://localhost/phpBB2-2.0.5/login.php?logout=true&amp;sid=6d2f32fdd596b44d2c8bb66f72b75e73[/img:cef221ae7d]')
+INSERT IGNORE INTO phpbb_search_wordlist (word_text, word_common) VALUES ('haha', 0)
+INSERT INTO phpbb_search_wordmatch (post_id, word_id, title_match) SELECT 8, word_id, 1 FROM phpbb_search_wordlist WHERE word_text IN ('haha')
+UPDATE phpbb_forums SET forum_posts = forum_posts + 1, forum_last_post_id = 8, forum_topics = forum_topics + 1 WHERE forum_id = 1
+UPDATE phpbb_topics SET topic_last_post_id = 8, topic_first_post_id = 8 WHERE topic_id = 6
+UPDATE phpbb_topics SET topic_views = topic_views + 1 WHERE topic_id = 6
+UPDATE phpbb_users SET user_posts = user_posts + 1 WHERE user_id = 10
+DELETE FROM phpbb_search_wordmatch WHERE post_id IN (9)
+UPDATE phpbb_topics SET topic_title = ':)', topic_type = 0 WHERE topic_id = 7
+UPDATE phpbb_posts SET post_username = '', enable_bbcode = 1, enable_html = 0, enable_smilies = 1, enable_sig = 0 WHERE post_id = 9
+UPDATE phpbb_posts_text SET post_text = ':) :D', bbcode_uid = 'ebff4791a8', post_subject = ':)' WHERE post_id = 9
+UPDATE phpbb_forums SET forum_posts = forum_posts + 1, forum_last_post_id = 11 WHERE forum_id = 1
+UPDATE phpbb_topics SET topic_last_post_id = 11, topic_replies = topic_replies + 1 WHERE topic_id = 8

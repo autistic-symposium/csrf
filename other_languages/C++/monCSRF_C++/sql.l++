@@ -1,0 +1,205 @@
+%option noyywrap
+%option never-interactive
+%option prefix = "sql"
+%option yylineno
+
+/* Our focus is more on accurately capturing the lexical
+   structure rather than the syntactic structure. This is again because
+   of the emphasis on simple scripts rather than complex ones; plus it is
+   not easy to write "approximate" grammars, so trying to write a tight
+   but not fully correct grammar is almost impossible; so we have to settle
+   for a rather loose grammar.
+*/
+
+%{
+#include <iostream>
+#include "ParserUtil.h"
+#include "Compatibility.h"
+#include "sql.tab.H"
+using namespace std;
+
+short paren_nesting=0;
+static short cmnt_nesting;
+int sql_preserve_ws=0, sql_preserve_comment=1;
+//#define DEBUG
+#ifdef DEBUG
+#define yylex_retval(x,y,z) { yylval_beg=y; yylval_len=z; \
+		cout << "lex returns " << x << ", value: [<"; \
+		cout.write(y, z); cout << ">]\n"; return x;}
+#else
+#define yylex_retval(x,y,z) { yylval_beg=y; yylval_len=z; return x;}
+#endif
+#define yylex_ret(x) yylex_retval(x, yytext, yyleng)
+
+static char* cmnt_start=NULL, *op_start=NULL;
+%}
+/* Definitions */
+
+WS			    	[\t\r\n ]
+STMT_SEP			";"
+ESCAPE		     	[\\]
+WORD_FIRST			[_A-Za-z]
+WORD_REST			[_A-Za-z0-9$]
+
+ESCAPESEQ			{ESCAPE}(.|"\n")
+DQBODY				[^"\\]|{ESCAPESEQ}|["]["]
+DQSTR				["]({DQBODY}*)["]
+SQBODY				[^'\\]|{ESCAPESEQ}|['][']
+SQSTR				[']({SQBODY}*)[']
+BQBODY				[^`\\]|{ESCAPESEQ}|[`][`]
+BQSTR				[`]({BQBODY}*)[`]
+
+OPERATOR			[-:+*/<>=~!#%^&|?]
+
+
+ONELINE_COM_BEG 	"--"|"#"
+MULTI_LINE_COM_BEG 	"/*"
+MULTI_LINE_COM_END 	"*/"
+OPEN_PAREN 			[[({]
+CLOSE_PAREN 		[])}]
+
+WORD				({WORD_FIRST})(({WORD_REST})*)|[*]
+VAR_NAME        	[@$]{WORD}
+
+DECIMAL_DIGIT  [0-9]
+HEXDIGIT	   [0-9A-Fa-f]
+MANTISSA_EINT  {DECIMAL_DIGIT}*[.]{DECIMAL_DIGIT}+
+MANTISSA_EFRAC {DECIMAL_DIGIT}+(([.]{DECIMAL_DIGIT}*)?)
+FLOAT_MANTISSA ({MANTISSA_EINT}|{MANTISSA_EFRAC})
+FLOAT_EXP	   [Ee]([+-]?){DECIMAL_DIGIT}+
+FLOATNUM	   {FLOAT_MANTISSA}({FLOAT_EXP}?)
+INTNUM		   {DECIMAL_DIGIT}+|[Bb]['][01]+[']|0b[01]+|[Xx][']{HEXDIGIT}+[']|0x{HEXDIGIT}+
+
+%x COMMENT TO_EOL_COMMENT OP
+%%
+
+<<EOF>> {
+	cmnt_nesting = 0;
+	cmnt_start = op_start = NULL;
+	BEGIN 0;
+	yyterminate();
+}
+
+{ONELINE_COM_BEG} {
+  cmnt_start = yytext;
+  BEGIN TO_EOL_COMMENT;
+}
+
+<TO_EOL_COMMENT>"\n" {
+   BEGIN 0;
+   if (sql_preserve_comment)
+	   yylex_retval(TOK_COMMENT, cmnt_start, yytext+1-cmnt_start);
+}
+
+<TO_EOL_COMMENT>. {
+}
+
+{MULTI_LINE_COM_BEG} {
+	BEGIN COMMENT;
+	cmnt_start = yytext;
+	cmnt_nesting = 1;
+}
+
+<COMMENT>{MULTI_LINE_COM_BEG} {
+	cmnt_nesting++;
+}
+
+<COMMENT>{MULTI_LINE_COM_END} {
+	if (--cmnt_nesting == 0) {
+    	BEGIN 0;
+	    if (sql_preserve_comment)
+		   yylex_retval(TOK_COMMENT, cmnt_start, yytext+2-cmnt_start);
+    }
+}
+
+<COMMENT>. {
+}
+
+{OPERATOR} {
+	op_start = yytext;
+	BEGIN OP;
+}
+
+<OP>{ONELINE_COM_BEG} {
+	cmnt_start = yytext;
+	BEGIN TO_EOL_COMMENT;
+	yylex_retval(TOK_OPERATOR, op_start, yytext-op_start);
+}
+
+<OP>{MULTI_LINE_COM_BEG} {
+	cmnt_start = yytext;
+	BEGIN COMMENT;
+	cmnt_nesting = 1;
+	yylex_retval(TOK_OPERATOR, op_start, yytext-op_start);
+}
+
+<OP>{OPERATOR} {
+}
+
+<OP>(.|"\n") {
+	BEGIN 0;
+	unput(*yytext);
+	yylex_retval(TOK_OPERATOR, op_start, yytext-op_start);
+}
+
+ /**************** Recognize operators ****************/
+
+{STMT_SEP} {
+	yylex_ret(TOK_STMT_SEP);
+}
+
+[.,] {
+	yylex_ret(TOK_OPERATOR);
+}
+
+{OPEN_PAREN} {
+	paren_nesting++;
+	yylex_ret(TOK_OPEN_PAREN);
+}
+
+{CLOSE_PAREN} {
+	if (paren_nesting > 0) {
+		paren_nesting--;
+		yylex_ret(TOK_CLOSE_PAREN);
+    }
+	else {
+		yylex_ret(TOK_WORD);
+    }
+}
+
+{FLOATNUM}|{INTNUM} {
+	yylex_ret(TOK_NUM);
+}
+
+{WORD}|{DQSTR}|{SQSTR}|{BQSTR}|{VAR_NAME} {
+	if (strcasecmp(yytext, "union") == 0)
+		{ yylex_ret(TOK_KEYWORD); }
+	else { yylex_ret(TOK_WORD); }
+    /* The best way to distinguish keywords from other data seems to be
+	   to use a hash table initialized with key words. A list of keywords
+	   can be easily obtained from references on the Internet. The learning
+	   algorithm may then be biased to remember keywords more than
+	   other fields of an SQL query.
+    */
+}
+
+{WS}+ {
+  if (sql_preserve_ws) {
+	  yylex_ret(TOK_WS);
+  }
+}
+
+. {
+  yylex_ret(TOK_OTHER);
+}
+
+%%
+
+
+void* sql_setup_buffer(char *base, unsigned int size) {
+	return (void*)sql_scan_buffer(base, size);
+};
+
+/*
+
+*/

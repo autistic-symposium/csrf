@@ -1,0 +1,2 @@
+UPDATE users SET session_user_id = -1, session_start = 1319238613, session_time = 1319238613, session_page = 0, session_logged_in = 0 WHERE session_id = '1'
+UPDATE phpbb_sessions SET session_user_id = -1, session_start = 1319238613, session_time = 1319238613, session_page = 0, session_logged_in = 0 WHERE session_id = '1' AND session_ip = '7f000001'

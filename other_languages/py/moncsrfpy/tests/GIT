@@ -1,0 +1,5 @@
+git add -A
+git commit -am 'message'
+git push
+
+git pull origin master

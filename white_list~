@@ -1,0 +1,2 @@
+UPDATE phpbb_sessions SET session_user_id = -1, session_start = 1319243049, session_time = 1319243049, session_page = 0, session_logged_in = 0 WHERE session_id = '1' AND session_ip = '7f000001'
+INSERT INTO phpbb_sessions (session_id, session_user_id, session_start, session_time, session_ip, session_page, session_logged_in) VALUES ('322e0872deb82ca8ea0da4a24a3472a8', -1, 1319243049, 1319243049, '7f000001', 0, 0)
