@@ -1,4 +1,10 @@
-Monitoring_CSRF_Attacks
+Monitoring CSRF Attacks
 =======================
 
-Monitoring_CSRF_Attacks: with Apache Mod-security
+A tool to monitor web server's log files against CSRF attacks. This was a final project for the graduate Computer Security class, taught by Prof. Sekar.
+
+
+It is a nice example of parser in Ruby and Ragel, together with some examples in C++ and Python.
+
+Some examples of modifications for modsecurity on Apache (used in examples in the program).
+
