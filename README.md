@@ -1,4 +1,4 @@
-💀# Monitoring CSRF Attacks 💀
+# 💀 Monitoring CSRF Attacks 💀
 
 A tool to monitor web server's log files against CSRF attacks. 
 
