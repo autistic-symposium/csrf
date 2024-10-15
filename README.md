@@ -1,18 +1,95 @@
-# Monitoring CSRF Attacks 💀
+## monitoring cross-site request forgery attacks with apache's modsecurity
 
-A tool to monitor web server's log files against CSRF attacks. 
+<br>
 
-It is a nice example of parser in Ruby and Ragel, together with some examples in C++ and Python.
+### tl; dr
 
-Some examples of modifications for modsecurity on Apache (used in examples in the program).
+* a tool to monitor web server's log files against CSRF attacks, including a modification for modsecurity on apache 
+* it is a nice example of a parser in ruby and ragel, together with some examples in C++ and python
 
-This was a final project for the Stony Brook graduate Computer Security class, taught by Prof. Sekar.
+<br>
 
+---
+
+### introduction
+
+* designed to detect requests in a web server that may result in CSRF, by parsing a given log file derived from a web server with DIVA and verifying whether (and how) the requests in this file had the state of the system changed (named potential unsafe requests)
+
+<br>
+
+---
+
+### parsing strategies
+
+
+* parsing by regular expressions (REGEXP) (at `/lib/log_parser/strategies/sql/regexp.rb`)
+* parsing into an abstract syntax tree (AST) (at `/lib/log_parser/strategies/sql/ragel.rl`)
+
+<br>
+
+---
+
+### ragel state machine
+
+* one can generate `.rb` files with:
+
+```
+ragel -R ragel.rl
+```
+
+
+* ragel is a state machine compiler and parse generator.
+* it combines lex and yacc into one and build a full state-machine for the input stream, i.e., one state-machine for the parser and lexer.
+* the machine of states parses the SQL request. in an initial state, it receives a string.
+* if in the of the string, the machine is in a final state, the SQL is valid. the AST is a way the machine uses to save the data.
+* the machine can get four initial paths: UPDATE, DELETE, SELECT, INSERT. it saves into the AST when the parse is executed.
+
+```
+ragel -R ragel.rl | rlgen-dot > ragel.dot
+```
+
+<br>
+
+---
+
+### whitelisting
+
+* every time one runs MonCSRF, every the potential unsafe requests will be compared to a whitelist.
+* in the case that program finds a previous similar whitelisted request (i.e., with same syntactic structure), the new request is automatically marked as safe. If the new request is not in the whitelist, the program will generate an alert and ask about its safety.
+* the whitelist file can be inspected at `/white_list`.
+
+<br>
+
+---
+
+### testings (for developers)
+
+```
+gem install bundler
+bundle
+spec spec
+```
+
+<br>
 
 ----
 
+### running
 
-## License
+* name the log file:
 
-When making a reference to my work, please use my [website](http://bt3gl.github.io/index.html).
-This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+```
+bin/parser.rb PATH_TO_THE_LOG
+````
+
+and run:
+
+```
+./run.sh
+```
+
+* run benchmark tests with:
+
+```
+./benchmark.sh
+```
